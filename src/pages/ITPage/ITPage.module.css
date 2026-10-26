@@ -1,0 +1,54 @@
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 30px;
+}
+
+.kicker {
+  color: #aebdff;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.title {
+  font-size: clamp(42px, 7vw, 72px);
+  margin: 20px 0;
+}
+
+.description {
+  max-width: 650px;
+  color: #bac3d7;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: 25px;
+  color: #aebdff;
+  text-decoration: none;
+}
+
+.sectionTitle {
+  margin: 80px 0 25px;
+  font-size: 30px;
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 60px 20px;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+}
