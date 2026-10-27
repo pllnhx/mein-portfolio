@@ -23,7 +23,7 @@ function HomePage() {
         </p>
 
         <h1 className={styles.title}>
-          Meine digitale Welt
+          Pascal's Portfolio
         </h1>
 
         <p className={styles.description}>
