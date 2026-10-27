@@ -1,12 +1,16 @@
 
 import './App.css'
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router'
 
 // Unsere einzelnen Seiten
 import HomePage from './pages/HomePage/HomePage'
 import ITPage from './pages/ITPage/ITPage'
 import MouseGlowPage from './pages/MouseGlowPage/MouseGlowPage'
-import ArtPage from './pages/ArtPage/ArtPage'
+
+const ArtLayout = lazy(() => import('./pages/ArtPage/ArtLayout'))
+const ArtPage = lazy(() => import('./pages/ArtPage/ArtPage'))
+const ArtGalleryPage = lazy(() => import('./pages/ArtPage/ArtGalleryPage'))
 
 function App() {
   return (
@@ -26,10 +30,17 @@ function App() {
         element={<MouseGlowPage />}
       />
 
-      <Route 
-        path="/art" 
-        element={<ARTPage />} 
-        />
+      <Route
+        path="/art"
+        element={
+          <Suspense fallback={<main role="status" style={{ minHeight: '100vh', background: '#f2eee5', color: '#39352e', padding: '48px', fontFamily: 'Georgia, serif' }}>Das Atelier öffnet sich …</main>}>
+            <ArtLayout />
+          </Suspense>
+        }
+      >
+        <Route index element={<ArtPage />} />
+        <Route path=":category" element={<ArtGalleryPage />} />
+      </Route>
 
     </Routes>
   )

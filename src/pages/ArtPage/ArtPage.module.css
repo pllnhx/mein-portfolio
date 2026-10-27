@@ -1,0 +1,254 @@
+.page {
+  --art-ink: #302e29;
+  --art-muted: #726e62;
+  --art-accent: #bb593a;
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: clip;
+  color: var(--art-ink);
+  background: #eeeae0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page::before,
+.page::after {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+}
+
+.page::before {
+  background: url('/art/paper.png') repeat;
+  background-size: 570px 570px;
+  opacity: .56;
+  mix-blend-mode: multiply;
+}
+
+.page::after {
+  z-index: -1;
+  background: radial-gradient(ellipse at 40% 28%, #fffdf754, transparent 66%), linear-gradient(120deg, #f8f3e61f, #d9cdb512);
+}
+
+.header {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: min(1400px, calc(100% - 112px));
+  min-height: 104px;
+  margin: 0 auto;
+  border-bottom: 1px solid #6b614526;
+}
+
+.homeLink {
+  display: inline-flex;
+  justify-self: start;
+  align-items: center;
+  gap: 13px;
+  color: #49463c;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.backArrow { font-size: 20px; transition: transform 180ms ease; }
+.homeLink:hover .backArrow { transform: translateX(-4px); }
+.homeLink:hover { color: var(--art-accent); }
+.wordmark { color: var(--art-ink); font-size: 25px; font-weight: 700; letter-spacing: -1.7px; text-decoration: none; }
+.wordmarkDot { color: var(--art-accent); }
+.headerNote { justify-self: end; color: #756f60; font-size: 10px; letter-spacing: .1px; }
+.headerNote span { display: inline-block; margin-left: 18px; color: #575246; font-size: 16px; }
+.main { width: min(1260px, calc(100% - 112px)); min-height: calc(100svh - 104px); margin: 0 auto; padding-bottom: 300px; outline: none; }
+.skipLink { position: fixed; z-index: 100; top: 12px; left: 12px; padding: 12px 18px; transform: translateY(-160%); color: var(--art-ink); background: #fffcf3; }
+.skipLink:focus { transform: translateY(0); }
+.page a:focus-visible:not([data-art-tool]) { outline: 2px solid #bb593a; outline-offset: 7px; border-radius: 2px; }
+
+.hero { position: relative; min-height: calc(100svh - 404px); padding: clamp(40px, 6.5vh, 80px) 0 22px; }
+.heroHeading { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; width: min(1050px, 100%); margin: 0 auto; }
+.eyebrow { display: flex; align-items: center; gap: 13px; margin: 0; color: #746f63; font-size: 9px; font-weight: 500; letter-spacing: 2.5px; line-height: 1.6; }
+.eyebrowLine { width: 27px; height: 1px; background: #9b8d71; }
+.handwritten { margin: 0 17px 0 0; color: #84745b; font-family: 'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: clamp(13px, 1.2vw, 17px); transform: rotate(-4deg); }
+.artTitle { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; width: min(1100px, 100%); height: clamp(135px, 25vw, 290px); margin: 10px auto 14px; padding: 0; }
+.letter { position: relative; display: block; flex: 1 1 20%; min-width: 0; height: 100%; }
+.letter img { display: block; width: 100%; height: 100%; object-fit: contain; user-select: none; }
+.letterK { transform: rotate(-3deg); }
+.letterU { transform: translateY(3%) rotate(1deg); }
+.letterN { transform: rotate(-2deg); }
+.letterS { transform: translateY(2%) rotate(3deg); }
+.letterT { transform: none; }
+.mediumLabel { position: absolute; right: 0; bottom: 0; left: 0; color: #746f62; font-size: 8px; font-weight: 400; letter-spacing: 1px; text-align: center; text-transform: uppercase; opacity: 0; transition: opacity 180ms ease; }
+.letter:hover .mediumLabel { opacity: .8; }
+.heroCopy { position: relative; z-index: 1; text-align: center; }
+.introduction { margin: 14px 0 13px; font-family: 'Iowan Old Style', 'Baskerville', 'Palatino Linotype', Georgia, serif; font-size: clamp(23px, 2.4vw, 34px); font-weight: 400; letter-spacing: -.9px; line-height: 1.2; }
+.mobileBreak { display: none; }
+.description { margin: 0; color: #716b5f; font-size: 12px; line-height: 1.9; }
+.heroBottom { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; margin-top: clamp(35px, 6vh, 70px); }
+.pageIndex, .paperNote { color: #847c6e; font-size: 8px; letter-spacing: 1.5px; }
+.pageIndex > span { margin-right: 10px; color: #494337; letter-spacing: 0; }
+.paperNote { justify-self: end; }
+.dockHint { display: inline-flex; align-items: center; gap: 18px; margin: 0; color: #7a6b54; font-family: 'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 15px; transform: rotate(-3deg); }
+.hintArrow { display: inline-block; font-family: Georgia, serif; font-size: 28px; transform: rotate(18deg) translateY(7px); }
+
+.gallery { position: relative; z-index: 1; width: min(1080px, 100%); margin: 0 auto; padding-top: 31px; }
+.overviewLink { display: inline-flex; align-items: center; gap: 13px; margin-bottom: 53px; color: #746c5d; font-size: 11px; text-decoration: none; }
+.overviewLink:hover, .galleryHome:hover { color: var(--art-accent); }
+.overviewLink span { font-size: 18px; }
+.galleryHeading { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+.galleryIndex { margin-left: 7px; color: #a09580; }
+.galleryTitle { margin: 13px 0 19px; font-family: 'Iowan Old Style', 'Baskerville', 'Palatino Linotype', Georgia, serif; font-size: clamp(55px, 8vw, 106px); font-weight: 400; letter-spacing: -4px; line-height: 1.05; }
+.titlePeriod { color: var(--art-accent); }
+.galleryDescription { max-width: 480px; margin: 0; color: #756d60; font-size: 13px; line-height: 1.85; }
+.galleryMedium { padding-right: 10px; color: #766d5a; font-family: 'Iowan Old Style', Georgia, serif; font-size: 72px; font-style: italic; font-weight: 400; letter-spacing: -5px; }
+.galleryMedium span { color: #a29988; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-style: normal; letter-spacing: 1px; }
+.emptyState { position: relative; display: flex; align-items: center; gap: 37px; margin-top: 39px; padding: 38px 0; border-top: 1px solid #6b61452d; border-bottom: 1px solid #6b61452d; }
+.emptySketch { position: relative; flex: 0 0 72px; height: 92px; margin-left: 8px; border: 1px solid #8b7d5c63; background: #fcf9ee35; transform: rotate(-7deg); }
+.emptySketch::before { position: absolute; inset: 9px; border: 1px solid #8b7d5c2b; content: ''; }
+.emptySketch::after { position: absolute; top: -8px; left: 17px; width: 35px; height: 16px; background: #c8b58365; transform: rotate(6deg); content: ''; }
+.emptySketch span { position: absolute; top: 36px; left: 19px; width: 37px; height: 1px; background: #87755468; transform: rotate(-20deg); }
+.emptySketch span:nth-child(2) { top: 46px; width: 27px; transform: rotate(12deg); }
+.emptySketch span:nth-child(3) { top: 56px; width: 32px; transform: rotate(-13deg); }
+.emptyKicker { margin: 0 0 12px; color: #998c75; font-size: 8px; letter-spacing: 2px; }
+.emptyState h2 { margin: 0 0 10px; font-family: 'Iowan Old Style', 'Baskerville', Georgia, serif; font-size: 24px; font-weight: 400; letter-spacing: -.4px; }
+.emptyState p:last-child { margin: 0; color: #83796a; font-size: 11px; line-height: 1.9; }
+.emptySignature { position: absolute; right: 28px; bottom: 37px; color: #a08b65; font-family: 'Bradley Hand', 'Segoe Print', 'Comic Sans MS', cursive; font-size: 22px; transform: rotate(-9deg); }
+.galleryFooter { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 26px; }
+.textLink { display: inline-flex; align-items: center; gap: 30px; color: #494234; font-size: 11px; text-decoration: none; }
+.textLink:hover { color: var(--art-accent); }
+.textLink > span { color: var(--art-accent); font-size: 17px; }
+.galleryHome { color: #8b806d; font-size: 10px; text-decoration: none; }
+.artworkGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px; margin-top: 48px; }
+.artwork { margin: 0; }
+.artwork img { display: block; width: 100%; height: auto; box-shadow: 0 8px 22px #46371c12; }
+.artwork figcaption { padding-top: 15px; color: #6b6151; font-size: 11px; }
+
+@media (min-height: 950px) and (min-width: 900px) {
+  .hero { padding-top: 90px; }
+  .artTitle { height: 320px; margin-top: 25px; }
+  .heroBottom { margin-top: 75px; }
+}
+
+@media (max-width: 900px) {
+  .header { width: calc(100% - 64px); min-height: 88px; }
+  .main { width: calc(100% - 64px); min-height: calc(100svh - 88px); }
+  .hero { min-height: calc(100svh - 388px); }
+  .paperNote { display: none; }
+  .heroBottom { grid-template-columns: 1fr auto; }
+  .dockHint { justify-self: end; }
+  .galleryMedium { font-size: 60px; }
+}
+
+@media (max-width: 600px) {
+  .header { width: calc(100% - 40px); grid-template-columns: 1fr auto; min-height: 76px; }
+  .homeLink { gap: 9px; font-size: 10px; }
+  .wordmark { font-size: 24px; }
+  .headerNote { display: none; }
+  .main { width: calc(100% - 40px); min-height: calc(100svh - 76px); padding-bottom: 250px; }
+  .hero { min-height: calc(100svh - 326px); padding-top: 43px; }
+  .heroHeading { flex-direction: column; align-items: flex-start; gap: 26px; }
+  .eyebrow { gap: 10px; font-size: 8px; letter-spacing: 2px; }
+  .handwritten { align-self: flex-end; margin-right: 5px; font-size: 13px; }
+  .artTitle { width: calc(100% + 20px); height: clamp(100px, 29vw, 170px); margin: 15px -10px 27px; }
+  .mediumLabel { display: none; }
+  .introduction { margin-top: 20px; font-size: 29px; line-height: 1.15; }
+  .mobileBreak { display: block; }
+  .description { font-size: 11px; line-height: 1.85; }
+  .heroBottom { margin-top: 32px; }
+  .pageIndex { max-width: 100px; font-size: 7px; line-height: 1.9; letter-spacing: 1px; }
+  .pageIndex > span { margin-right: 5px; }
+  .dockHint { gap: 9px; font-size: 13px; }
+  .hintArrow { font-size: 23px; }
+  .gallery { padding-top: 25px; }
+  .overviewLink { margin-bottom: 28px; font-size: 10px; }
+  .galleryTitle { margin-top: 18px; font-size: clamp(46px, 12vw, 68px); letter-spacing: -2px; }
+  .galleryDescription { font-size: 12px; }
+  .galleryMedium { display: none; }
+  .emptyState { gap: 22px; margin-top: 26px; padding: 24px 0; }
+  .emptySketch { flex-basis: 55px; height: 73px; margin-left: 4px; }
+  .emptySketch::after { left: 9px; }
+  .emptySketch span { left: 14px; width: 25px; }
+  .emptySketch span:nth-child(2) { width: 22px; }
+  .emptySketch span:nth-child(3) { width: 24px; }
+  .emptyKicker { font-size: 7px; letter-spacing: 1.2px; }
+  .emptyState h2 { max-width: 210px; font-size: 21px; line-height: 1.2; }
+  .emptyState p:last-child { font-size: 10px; }
+  .emptySignature { display: none; }
+  .galleryFooter { gap: 12px; }
+  .textLink { gap: 12px; font-size: 10px; }
+  .galleryHome { font-size: 9px; }
+  .artworkGrid { grid-template-columns: 1fr; gap: 30px; margin-top: 34px; }
+}
+
+/* The fixed tools need clear space even when the browser window is shallow. */
+@media (min-width: 601px) and (max-height: 800px) {
+  .header { min-height: 86px; }
+  .main { min-height: calc(100svh - 86px); }
+  .hero { min-height: calc(100svh - 386px); padding: 34px 0 18px; }
+  .artTitle { height: clamp(150px, 26vh, 200px); margin: 8px auto 10px; }
+  .introduction { margin: 10px 0 9px; font-size: 26px; }
+  .description { font-size: 11.5px; line-height: 1.8; }
+  .heroBottom { margin-top: 22px; }
+  .gallery { padding-top: 24px; }
+  .overviewLink { margin-bottom: 24px; }
+  .galleryHeading { align-items: flex-start; }
+  .galleryTitle { margin: 10px 0 13px; font-size: clamp(48px, 6.5vw, 72px); letter-spacing: -3px; }
+  .galleryDescription { max-width: 640px; font-size: 12px; line-height: 1.7; }
+  .galleryMedium { margin-top: 17px; font-size: 54px; }
+  .emptyState { gap: 28px; margin-top: 24px; padding: 20px 0; }
+  .emptySketch { flex-basis: 54px; height: 70px; }
+  .emptySketch::after { left: 9px; }
+  .emptySketch span { left: 13px; max-width: 25px; }
+  .emptyKicker { margin-bottom: 10px; }
+  .emptyState h2 { margin-bottom: 8px; font-size: 21px; }
+  .emptyState p:last-child { line-height: 1.7; }
+  .emptySignature { right: 20px; bottom: 24px; font-size: 18px; }
+  .galleryFooter { display: none; }
+}
+
+@media (min-width: 601px) and (max-height: 650px) {
+  .header { min-height: 72px; }
+  .main { min-height: calc(100svh - 72px); }
+  .hero { min-height: calc(100svh - 372px); padding-top: 24px; }
+  .artTitle { height: clamp(125px, 24vh, 156px); }
+  .introduction { font-size: 24px; }
+  .description { font-size: 11px; }
+  .heroBottom { margin-top: 16px; }
+  .gallery { padding-top: 18px; }
+  .overviewLink { margin-bottom: 17px; }
+  .galleryTitle { font-size: clamp(44px, 6vw, 60px); }
+  .emptyState { margin-top: 18px; padding: 16px 0; }
+}
+
+@media (max-width: 600px) and (max-height: 700px) {
+  .header { min-height: 64px; }
+  .main { min-height: calc(100svh - 64px); }
+  .hero { min-height: calc(100svh - 314px); padding: 18px 0 16px; }
+  .heroHeading { flex-direction: row; align-items: center; gap: 10px; }
+  .eyebrow { gap: 8px; font-size: 7px; letter-spacing: 1.4px; }
+  .eyebrowLine { width: 19px; }
+  .handwritten { align-self: auto; margin: 0; font-size: clamp(9px, 2.6vw, 11px); white-space: nowrap; }
+  .artTitle { height: clamp(84px, 24vw, 120px); margin: 4px -10px 8px; }
+  .introduction { margin: 6px 0 8px; font-size: clamp(20px, 5.7vw, 23px); line-height: 1.2; }
+  .mobileBreak { display: none; }
+  .description { font-size: 10.5px; line-height: 1.75; }
+  .heroBottom { margin-top: 14px; }
+  .gallery { padding-top: 18px; }
+  .overviewLink { margin-bottom: 20px; }
+  .galleryTitle { margin: 10px 0; font-size: clamp(43px, 12vw, 62px); }
+  .galleryDescription { font-size: 11px; line-height: 1.65; }
+  .emptyState { gap: 18px; margin-top: 20px; padding: 18px 0; }
+  .emptySketch { flex-basis: 45px; height: 64px; }
+  .emptySketch::after { left: 6px; width: 30px; }
+  .emptySketch span { left: 10px; max-width: 22px; }
+  .emptyKicker { margin-bottom: 8px; }
+  .emptyState h2 { max-width: none; margin-bottom: 8px; font-size: 20px; line-height: 1.15; }
+  .emptyState p:last-child { line-height: 1.7; }
+  .galleryFooter { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backArrow, .mediumLabel { transition: none; }
+}
