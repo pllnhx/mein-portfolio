@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router'
 import HomePage from './pages/HomePage/HomePage'
 import ITPage from './pages/ITPage/ITPage'
 import MouseGlowPage from './pages/MouseGlowPage/MouseGlowPage'
+import ArtPage from './pages/ArtPage/ArtPage'
 
 function App() {
   return (
@@ -24,6 +25,12 @@ function App() {
         path="/it/mouseglow"
         element={<MouseGlowPage />}
       />
+
+      <Route 
+        path="/art" 
+        element={<ARTPage />} 
+        />
+
     </Routes>
   )
 }

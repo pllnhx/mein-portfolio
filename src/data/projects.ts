@@ -32,7 +32,8 @@ export const projects: Project[] = [
     title: 'Kunstprojekt',
     category: 'Kunst',
     description: 'Hier zeige ich später eigene Zeichnungen und Kunstwerke.',
-    status: 'Geplant',
+    status: 'In Arbeit',
+    path: '/art',
   },
   {
     id: '3d-experiment',
