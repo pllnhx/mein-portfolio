@@ -25,7 +25,7 @@
 .navigation { display: flex; align-items: center; gap: 28px; min-height: 100px; border-bottom: 1px solid #ffffff10; font-size: 12px; }
 .homeLink { display: inline-flex; align-items: center; gap: 13px; color: #e5e9e6; text-decoration: none; }
 .logo { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 1px solid #ffffff21; border-radius: 9px; background: #ffffff04; font-size: 18px; letter-spacing: -3px; padding-right: 3px; }
-.logo span, .navLocation > span { color: var(--green); }
+.logo > span:last-child, .navLocation > span:first-child { color: var(--green); }
 .path { color: #777f79; }
 .navLocation { margin-left: auto; color: #919a93; font-size: 11px; }
 .navLink { color: #d7dcd8; text-decoration: none; margin-left: 35px; }
@@ -48,8 +48,11 @@
 .lastWord { white-space: nowrap; }
 .cursor { display: inline-block; width: .38em; height: .84em; margin-left: .12em; vertical-align: -.05em; background: var(--green); animation: cursorBlink 1.15s steps(1, end) infinite; }
 .glitchLayer { display: none; position: absolute; inset: 0; pointer-events: none; }
-.glitching .glitchLayer { display: block; animation: glitchShift 180ms steps(2, end) both; text-shadow: -2px 0 #b1c8e5; clip-path: inset(24% 0 49%); }
-.glitching .glitchLayer:last-child { animation-direction: reverse; text-shadow: 2px 0 #b99cae; clip-path: inset(66% 0 13%); }
+.glitching .glitchLayer { display: block; animation: glitchShift 180ms steps(2, end) both; color: #f0f5f1; text-shadow: -2px 0 #eef3ef; clip-path: inset(24% 0 49%); }
+.glitching .glitchLayer:last-child { animation-direction: reverse; text-shadow: 2px 0 #cbd5ce; clip-path: inset(66% 0 13%); }
+.colorGlitch .glitchLayer { color: #ff4554; text-shadow: -3px 0 #ff4554; }
+.colorGlitch .glitchLayer:last-child { color: #62f5ed; text-shadow: 3px 0 #62f5ed; }
+.colorGlitch .glitchLayer .titlePrompt { color: inherit; }
 .glitchLayer .cursor { visibility: hidden; }
 .description { margin: 0 0 15px; font-size: 18px; line-height: 1.7; letter-spacing: -.6px; color: #d6dcd7; }
 .introduction { max-width: 410px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.95; }
@@ -81,7 +84,7 @@
 .function { color: #b8ccdb; }
 .editorStatus { display: flex; justify-content: space-between; gap: 10px; padding: 10px 15px; border-top: 1px solid #ffffff0b; font-size: 8px; color: #98a49a; background: #a3e8b704; }
 .editorStatus > span:first-child { display: flex; align-items: center; gap: 7px; }
-.editorStatus > span:last-child > span { margin-left: 10px; color: var(--green); }
+.editorStatus > span:last-child > span[aria-hidden] { margin-left: 10px; color: var(--green); }
 .stackStrip { display: flex; align-items: center; gap: 35px; padding: 23px 0; border-block: 1px solid #ffffff10; color: #abb3ac; font-size: 11px; }
 .stackLabel { margin-right: auto; font-size: 8px; letter-spacing: 1px; color: #879188; }
 .stackEnd { margin-left: auto; color: #6d7970; font-size: 17px; }
@@ -107,6 +110,7 @@
 .page a:focus-visible, .page button:focus-visible, .codePreview:focus-visible { outline: 2px solid var(--green); outline-offset: 5px; border-radius: 4px; }
 .page a:hover { color: #d4f0dc; }
 .codeBackground { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; user-select: none; }
+.binaryTrail { position: fixed; z-index: -1; inset: 0; width: 100%; height: 100%; pointer-events: none; user-select: none; }
 .backgroundBlock { position: absolute; width: 380px; max-width: 90%; color: #b3e7bd; font-size: 10px; line-height: 1.8; opacity: .075; animation: blockLife var(--lifetime) linear both; }
 .backgroundLine { display: block; width: 0; max-width: 100%; height: 1.8em; overflow: hidden; white-space: pre; animation: typeLine var(--typing-duration) steps(var(--characters), end) var(--typing-delay) forwards; }
 
@@ -161,6 +165,109 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .page *, .page *::before, .page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-  .glitchLayer, .codeBackground { display: none !important; }
+  .glitchLayer, .codeBackground, .binaryTrail { display: none !important; }
   .cursor { opacity: 1; }
+}
+
+/* Transient viewport interference. All visual layers leave pointer events free. */
+.screenDistortion {
+  animation: screenTear var(--screen-duration) steps(1, end) both;
+}
+
+.screenOverlay {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #061e1bc9, #050d0c99 70%);
+  opacity: var(--screen-opacity);
+  pointer-events: none;
+  user-select: none;
+  animation: interferenceLife var(--screen-duration) linear both;
+}
+
+.screenOverlay::before,
+.screenOverlay::after {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+}
+
+.screenOverlay::before {
+  background: repeating-linear-gradient(0deg, transparent 0 3px, #76ffed26 3px 4px);
+  mix-blend-mode: screen;
+}
+
+.screenOverlay::after {
+  background: linear-gradient(transparent 31%, #59f5ed60 31% 31.6%, transparent 31.6% 68%, #ff44573d 68% 68.8%, transparent 68.8%);
+  animation: scanDisplacement var(--screen-duration) steps(5, end) both;
+}
+
+.interferenceCode {
+  position: absolute;
+  inset: -10% -8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow: hidden;
+  color: #83cfc4;
+  opacity: .55;
+  font-size: clamp(9px, 1vw, 14px);
+  line-height: 2.2;
+  white-space: nowrap;
+  transform: rotate(-3deg) scale(1.03);
+}
+
+.interferenceCode > div:nth-child(2n) { align-self: flex-end; color: #a5e9df; }
+.interferenceCode > div:nth-child(3n) { transform: translateX(14%); }
+.skullFrame { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px 16px; }
+.overlayLabel { color: #aaffec; font-size: clamp(8px, 1vw, 11px); letter-spacing: .3em; }
+.codeSkull { display: block; flex-shrink: 1; width: min(54vw, 490px); min-height: 0; max-height: 68svh; margin: 12px 0 0; filter: drop-shadow(-3px 0 #ff415c73) drop-shadow(3px 0 #67ffeb80); animation: skullDisplacement var(--screen-duration) steps(1, end) both; }
+.overlayMessage { display: flex; flex-direction: column; align-items: center; gap: 9px; color: #9ffff0; font-family: 'Terminal Segments', monospace; font-size: clamp(16px, 3vw, 30px); letter-spacing: .2em; text-shadow: -2px 0 #f04c6980; }
+.overlayMessage > span { color: #ff7781; font-family: inherit; font-size: 10px; letter-spacing: .3em; }
+.pixelArtifacts { position: absolute; inset: 0; opacity: .8; animation: artifactDisplacement var(--screen-duration) steps(1, end) both; }
+.pixelArtifacts i { position: absolute; width: 7vw; height: 1.1vh; background: #8affec; }
+.pixelArtifacts i:nth-child(1) { top: 13%; left: 9%; width: 18vw; height: .4vh; }
+.pixelArtifacts i:nth-child(2) { top: 36%; right: 7%; background: #ff536b; }
+.pixelArtifacts i:nth-child(3) { top: 57%; left: 22%; width: 13vw; height: .6vh; }
+.pixelArtifacts i:nth-child(4) { bottom: 19%; right: 18%; width: 21vw; }
+.pixelArtifacts i:nth-child(5) { top: 23%; right: 24%; width: .7vw; height: 3vh; }
+.pixelArtifacts i:nth-child(6) { bottom: 11%; left: 6%; width: 3vw; background: #ff536b; }
+
+@keyframes interferenceLife {
+  0%, 100% { opacity: 0; }
+  7%, 88% { opacity: var(--screen-opacity); }
+}
+
+@keyframes screenTear {
+  0%, 9%, 23%, 47%, 72%, 100% { transform: translate(0); filter: none; }
+  12% { transform: translate(-5px, 1px); filter: contrast(1.1); }
+  29% { transform: translate(4px, -1px); }
+  54% { transform: translate(-3px); filter: contrast(1.08); }
+  78% { transform: translate(3px, 1px); }
+}
+
+@keyframes skullDisplacement {
+  0%, 18%, 44%, 70%, 100% { transform: translate(0); }
+  10%, 49% { transform: translate(-8px, 2px); }
+  31%, 76% { transform: translate(5px, -1px) skewX(1deg); }
+}
+
+@keyframes scanDisplacement {
+  from { transform: translateY(-20%); }
+  to { transform: translateY(25%); }
+}
+
+@keyframes artifactDisplacement {
+  0%, 100% { transform: translate(0); opacity: .5; }
+  20%, 65% { transform: translate(4vw, 3vh); opacity: .8; }
+  40%, 80% { transform: translate(-3vw, -1vh); opacity: .4; }
+}
+
+@media (max-width: 760px) { .codeSkull { width: min(88vw, 400px); } }
+@media (prefers-reduced-motion: reduce) {
+  .screenOverlay { display: none; }
+  .screenDistortion { animation: none; transform: none; filter: none; }
 }
