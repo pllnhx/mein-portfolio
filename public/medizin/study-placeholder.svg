@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="800" viewBox="0 0 1100 800" fill="none">
+  <title>Abstrakte räumliche Studie</title>
+  <desc>Eine ruhige Komposition aus Kugeln, feinen Verbindungen und einem limettengrünen Akzent. Grafischer Bildplatzhalter ohne Darstellung konkreter Forschungsergebnisse.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1100" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#f4f4ec"/><stop offset="1" stop-color="#dfe3d6"/></linearGradient>
+    <radialGradient id="sphere" cx="0" cy="0" r="1" gradientTransform="translate(-42 -55) rotate(51) scale(195)" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset=".34" stop-color="#e4e9da"/><stop offset=".75" stop-color="#a2ae95"/><stop offset="1" stop-color="#647257"/></radialGradient>
+    <radialGradient id="lime" cx="0" cy="0" r="1" gradientTransform="translate(-23 -26) rotate(51) scale(116)" gradientUnits="userSpaceOnUse"><stop stop-color="#e6ffb2"/><stop offset=".48" stop-color="#cbff32"/><stop offset="1" stop-color="#80ac2b"/></radialGradient>
+    <linearGradient id="link" x1="315" y1="220" x2="760" y2="580" gradientUnits="userSpaceOnUse"><stop stop-color="#e9eee0"/><stop offset=".5" stop-color="#abb99a"/><stop offset="1" stop-color="#e9eee0"/></linearGradient>
+    <filter id="shadow" x="135" y="546" width="840" height="178" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="24"/></filter>
+    <g id="orb">
+      <circle r="106" fill="url(#sphere)"/>
+      <g stroke="#f4f4ec" stroke-opacity=".36" stroke-width="1.2">
+        <ellipse rx="32" ry="105" transform="rotate(-28)"/>
+        <ellipse rx="69" ry="105" transform="rotate(-28)"/>
+        <ellipse rx="105" ry="26" transform="rotate(-28)"/>
+        <ellipse rx="105" ry="65" transform="rotate(-28)"/>
+      </g>
+      <circle r="105.5" stroke="#fff" stroke-opacity=".35"/>
+    </g>
+  </defs>
+  <path fill="url(#background)" d="M0 0h1100v800H0z"/>
+  <g stroke="#1c211b" stroke-opacity=".065">
+    <path d="M66 0v800M1034 0v800M0 66h1100M0 734h1100M550 66v668"/>
+    <ellipse cx="550" cy="415" rx="377" ry="262" transform="rotate(-15 550 415)"/>
+    <ellipse cx="550" cy="415" rx="399" ry="281" transform="rotate(-15 550 415)"/>
+  </g>
+  <ellipse cx="555" cy="635" rx="336" ry="25" fill="#657458" fill-opacity=".19" filter="url(#shadow)"/>
+  <g stroke="url(#link)" stroke-width="24" stroke-linecap="round">
+    <path d="m357 300 185-92m0 0 204 141m0 0-55 201m0 0-218 7m0 0L357 300m0 0 389 49m-204-141-69 349"/>
+  </g>
+  <g stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"><path d="m357 292 185-92m0 0 204 141m0 0-55 201m0 0-218 7m0 0L357 292"/></g>
+  <use href="#orb" transform="translate(542 208) scale(.64)"/>
+  <use href="#orb" transform="translate(746 349) scale(.9)"/>
+  <use href="#orb" transform="translate(691 550) scale(.65)"/>
+  <use href="#orb" transform="translate(357 300) scale(1.15)"/>
+  <circle cx="473" cy="557" r="78" fill="url(#lime)"/>
+  <g stroke="#f4f4ec" stroke-opacity=".45" stroke-width="1.2"><ellipse cx="473" cy="557" rx="30" ry="77" transform="rotate(21 473 557)"/><ellipse cx="473" cy="557" rx="77" ry="30" transform="rotate(21 473 557)"/></g>
+  <g stroke="#1c211b" stroke-opacity=".37" stroke-width="1.5"><path d="M57 66h18M66 57v18M1025 66h18M1034 57v18M57 734h18M66 725v18M1025 734h18M1034 725v18"/></g>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100" fill="none">
+  <title>Schematische Gefäßansicht der Büste</title>
+  <desc>Eine illustrative Designstudie mit korallroten und cyanblauen Gefäßverzweigungen im Kopf und Hals. Das transparente Overlay folgt der skulpturalen Büste und ist keine anatomische Lehrgrafik.</desc>
+  <defs>
+    <path id="profile" d="M167 1035c37-108 153-116 178-213l4-118c-64-57-77-147-59-253 8-104 48-168 143-181 91-12 146 23 175 99 24 58 9 107 46 150l39 40c12 17-3 24-15 25l-29 7c-7 33 4 46 4 50 4 9-13 19-30 29 9 33-16 51-16 51l-63 13-3 82c24 86 169 93 211 219H167Z"/>
+    <clipPath id="bust"><use href="#profile"/></clipPath>
+    <linearGradient id="tint" x1="385" y1="275" x2="476" y2="1040" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b2938" stop-opacity=".73"/>
+      <stop offset=".53" stop-color="#12313a" stop-opacity=".67"/>
+      <stop offset="1" stop-color="#153139" stop-opacity=".5"/>
+    </linearGradient>
+    <radialGradient id="brainLight" cx="0" cy="0" r="1" gradientTransform="translate(455 440) rotate(90) scale(200 165)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5ce3ef" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#5ce3ef" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-20%" y="-10%" width="140%" height="120%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <g id="arteries" stroke="#ff725f" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M426 1046c20-88 40-142 38-215-2-55-4-94 9-140 11-41 33-71 26-111-6-34-26-56-25-95 1-31 20-53 11-80" stroke-width="7"/>
+      <path d="M473 690c-31-25-58-58-72-94-16-44-12-94-35-132-17-30-34-52-27-86 7-39 42-60 75-75" stroke-width="4.5"/>
+      <path d="M485 407c2-39 23-57 53-78M479 448c34-20 62-43 74-75M497 556c35-13 59-32 72-61 10-22 16-48 13-75M497 609c44 12 77 5 105-10 21-12 39-19 60-23" stroke-width="4"/>
+      <path d="M464 831c-37 34-66 65-106 85-40 19-84 21-111 51M463 882c35 30 67 56 105 69 33 12 82 30 111 56" stroke-width="4.5"/>
+      <path d="M364 463c-35-5-62-22-75-46M373 483c-33 14-56 36-67 64M396 554c-35-1-66 13-83 34M406 609c-29 22-46 44-53 69M438 652c-35 5-67 1-91-10" stroke-width="2.6"/>
+      <path d="M339 378c-12-28-10-50 5-72M352 349c28 8 48 6 65-7 18-13 24-31 25-55M414 303c19 17 31 39 28 65 0 22-11 41-9 62M450 353c20-16 35-36 40-62M480 409c-28 0-49-13-64-32M522 347c10 19 14 36 10 56M539 330c17 4 28 16 36 29" stroke-width="2.6"/>
+      <path d="M553 373c21 1 39-8 54-20M552 411c21 10 34 21 39 39M579 452c-21-4-39-1-54 8M564 503c18 10 33 18 50 38M531 536c-8-18-10-38-7-57M602 599c9-19 18-29 34-40M558 612c5 24 18 44 40 57M500 636c21 7 39 22 51 45" stroke-width="2.4"/>
+      <path d="M473 728c-27 3-52 16-69 36M466 778c26 10 46 29 58 52M464 836c24 6 39 19 48 35M416 880c-11-20-20-41-18-67M361 913c-6-23-3-42 9-60M315 933c3 19-2 39-13 55M520 929c9-28 18-46 37-60M565 952c-1 26 8 49 24 65" stroke-width="2.2"/>
+    </g>
+    <g id="veins" stroke="#77ddf3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M503 1045c-11-73-12-128-3-190 7-48 17-94 18-137 0-42-6-80-17-113-12-34-39-62-41-98-2-29 6-53-3-80" stroke-width="6"/>
+      <path d="M459 503c-26-23-42-52-46-80-6-37 5-77 30-100 23-20 57-33 90-26M460 468c-26-10-57-11-80-28-25-18-38-39-43-62M502 607c-35 8-63 4-91-12-30-17-46-42-69-65" stroke-width="3.7"/>
+      <path d="M501 607c38-36 59-66 58-101-1-29-16-46-13-76 2-25 16-45 38-58M510 650c36 3 63-10 83-30 19-19 32-26 53-30M499 858c39 20 67 41 101 61 40 22 88 30 117 60M499 919c-28 18-59 34-88 41-40 9-76 25-99 54" stroke-width="3.8"/>
+      <path d="M413 419c-30-9-48-27-57-51M420 366c-12-18-19-38-17-59M449 321c-4-22 0-44 10-58M483 305c10 21 11 42 6 62M516 299c15 13 26 27 31 45M413 446c-25 6-46 18-62 38M439 481c-22 17-32 36-35 60M460 506c31-8 52-22 64-41" stroke-width="2.2"/>
+      <path d="M380 440c-8 24-4 43 7 60M342 530c-25 3-42 14-55 31M365 558c-21 14-36 31-45 52M411 595c-18 14-25 31-26 50M444 609c-9 30-7 51 3 75M501 607c-15-14-27-22-45-25" stroke-width="2.2"/>
+      <path d="M547 430c23-2 40 7 55 22M557 483c25-5 42-18 53-36M559 511c20 3 38 11 52 26M546 554c-18-4-31-15-38-32M530 581c22 7 41 8 62 3M591 622c8 17 21 27 39 31M551 643c-4 22 1 43 16 61" stroke-width="2.2"/>
+      <path d="M517 718c-25-7-44-21-56-41M516 758c24-2 43 6 58 21M511 800c-20 8-37 20-47 38M500 856c-20-8-36-22-46-42M540 881c11-18 24-31 43-37M601 920c11-13 25-21 43-22M451 950c-10-17-12-34-7-55M409 960c-14-12-28-19-45-20" stroke-width="2"/>
+    </g>
+  </defs>
+  <g clip-path="url(#bust)">
+    <use href="#profile" fill="url(#tint)"/>
+    <ellipse cx="455" cy="440" rx="185" ry="205" fill="url(#brainLight)"/>
+    <g opacity=".35" filter="url(#glow)">
+      <use href="#arteries"/>
+      <use href="#veins"/>
+    </g>
+    <use href="#arteries"/>
+    <use href="#veins"/>
+    <g stroke="#ffb39b" stroke-width="1.2" stroke-linecap="round" opacity=".82">
+      <path d="M343 308l-13-17m13 17 5-24M417 342l-11-17m11 17 17-2M442 368l-15-8m15 8 14 10M433 430l-16-9m16 9 7 17M351 350l9-17m-9 17-17-1M304 429l-16-3m16 3-8 15M308 541l-19 3m19-3-6-16M324 577l-17-8m17 8-1 20M353 677l-17 6m17-6 10 15M347 642l-13 13m13-13-14-8M490 294l-9-16m9 16 16-9M532 401l-10 13m10-13 13 2M575 359l11-9m-11 9 13 8M590 450l13 5m-13-5 5-15M524 479l-11-12m11 12-12 6M614 541l15 1m-15-1 4 14M551 681l-2 16m2-16 15 5M597 666l15 3m-15-3-3 16M638 559l3-15m-3 15 16 2M403 765l-13 1m13-1-2 15M523 830l12 5m-12-5-2 14M399 813l-12-12m12 12 11-8M369 853l-12-8m12 8 12-6M312 982l-1 15m1-15 12 7M555 871l-2-16m2 16 15-2M589 1016l-1 15m1-15 15 4"/>
+    </g>
+    <g stroke="#a1e9f9" stroke-width="1.1" stroke-linecap="round" opacity=".72">
+      <path d="M356 368l-15-4m15 4-2-17M403 308l-14-11m14 11 11-11M459 267l-7-16m7 16 15-10M490 368l-7 14m7-14 11 5M547 345l13-2m-13 2 4 15M351 484l-16 3m16-3-5-15M388 500l-12 14m12-14 13 4M405 542l-10 10m10-10 11 3M287 561l-12-4m12 4-6 14M321 608l-13 5m13-5 2 15M385 645l-13 6m13-6 6 14M447 684l-8 15m8-15 13 4M602 453l10-5m-10 5 10 8M609 447l3-14m-3 14 13 4M611 537l14 4m-14-4 2 15M509 521l-5-13m5 13-13 6M593 584l14-4m-14 4 9 12M631 652l13 2m-13-2 3 13M567 704l13 6m-13-6-1 15M574 780l13 3m-13-3 3 14M463 839l-13 4m13-4-2 13M583 845l8-13m-8 13 15 2M644 899l14 3m-14-3 3-14M444 896l-7-15m7 15 11-6M364 940l-14 3m14-3-6-11"/>
+    </g>
+    <g fill="#ffd9c9" opacity=".9">
+      <circle cx="485" cy="408" r="2.6"/><circle cx="473" cy="690" r="2.8"/><circle cx="497" cy="556" r="2.3"/><circle cx="464" cy="831" r="2.4"/><circle cx="365" cy="463" r="2"/>
+    </g>
+    <g fill="#cff4ff" opacity=".86">
+      <circle cx="460" cy="503" r="2.4"/><circle cx="501" cy="607" r="2.5"/><circle cx="517" cy="718" r="2.3"/><circle cx="499" cy="858" r="2.4"/><circle cx="413" cy="419" r="1.8"/>
+    </g>
+  </g>
+</svg>

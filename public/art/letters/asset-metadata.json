@@ -1,0 +1,157 @@
+[
+  {
+    "file": "k.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "bytes": 1769575,
+    "alpha_bbox": [
+      0,
+      25,
+      1240,
+      1254
+    ],
+    "alpha_dense_bbox": [
+      144,
+      123,
+      1157,
+      1148
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "file": "n.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "bytes": 1409071,
+    "alpha_bbox": [
+      0,
+      21,
+      1200,
+      1134
+    ],
+    "alpha_dense_bbox": [
+      186,
+      104,
+      1112,
+      1125
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "file": "s.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "bytes": 1937597,
+    "alpha_bbox": [
+      0,
+      0,
+      1224,
+      1226
+    ],
+    "alpha_dense_bbox": [
+      237,
+      77,
+      1034,
+      1203
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_corners": [
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "file": "t.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "bytes": 1120082,
+    "alpha_bbox": [
+      27,
+      37,
+      1224,
+      1254
+    ],
+    "alpha_dense_bbox": [
+      119,
+      105,
+      1126,
+      1169
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "file": "u.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "bytes": 1474622,
+    "alpha_bbox": [
+      0,
+      21,
+      1208,
+      1254
+    ],
+    "alpha_dense_bbox": [
+      193,
+      117,
+      1074,
+      1170
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+]

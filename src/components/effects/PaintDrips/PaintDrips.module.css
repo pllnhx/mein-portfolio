@@ -1,0 +1,17 @@
+.layer { position: fixed; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
+.bead, .drop { position: absolute; display: block; width: 8px; height: 11px; border-radius: 42% 42% 48% 48%; background: radial-gradient(ellipse at 30% 25%, #ec9a5d, #ce632d 55%, #a94b24); box-shadow: inset -1px -1px 2px #873b2240; transform-origin: center top; }
+.bead { width: 7px; height: 11px; margin-left: -3px; animation: gather 5s ease-in infinite; }
+.drop { margin-left: -4px; animation: fall 1650ms cubic-bezier(.46, .02, .88, .65) both; }
+@keyframes gather {
+  0%, 15% { transform: scale(.5, .25); opacity: .7; }
+  65% { transform: scale(.8, .8); opacity: 1; }
+  95% { transform: scale(1, 1.2); opacity: 1; }
+  100% { transform: scale(.5, .25); opacity: .7; }
+}
+@keyframes fall {
+  0% { transform: translateY(0) scale(.8, 1); opacity: 1; }
+  12% { transform: translateY(7px) scale(.8, 1.55); opacity: 1; }
+  72% { opacity: .82; }
+  100% { transform: translateY(var(--drop-distance)) scale(.65, 1.5); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .layer { display: none; } }
