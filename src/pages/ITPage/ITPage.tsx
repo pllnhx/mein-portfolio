@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 import ProjectCard from '../../components/ui/ProjectCard/ProjectCard'
 import { projects } from '../../data/projects'
-import { CodeBackground, GlitchTitle } from './TerminalEffects'
+import { BinaryMouseTrail, CodeBackground, GlitchTitle, PageEffects } from './TerminalEffects'
 import styles from './ITPage.module.css'
 
 const itProjects = projects.filter((project) => project.category.startsWith('IT'))
@@ -19,14 +19,15 @@ function ITPage() {
   return (
     <main className={styles.page}>
       <CodeBackground />
-      <div className={styles.container}>
+      <BinaryMouseTrail />
+      <PageEffects className={styles.container}>
         <nav className={styles.navigation} aria-label="Seitennavigation">
           <Link to="/" className={styles.homeLink} aria-label="Zurück zur Startseite">
             <span className={styles.logo} aria-hidden="true">p<span>_</span></span>
             <span>pascal<span className={styles.path}> / portfolio</span></span>
           </Link>
           <span className={styles.navLocation}><span>~/</span> it & vibe coding</span>
-          <a href="#projekte" className={styles.navLink}>Projekte <span aria-hidden="true">↗</span></a>
+          <Link to="#projekte" className={styles.navLink}>Projekte <span aria-hidden="true">↗</span></Link>
         </nav>
 
         <section className={styles.hero} aria-labelledby="it-title">
@@ -35,7 +36,7 @@ function ITPage() {
             <GlitchTitle />
             <p className={styles.description}>Ideen werden Code.<br />Und Code wird etwas, das bleibt.</p>
             <p className={styles.introduction}>Mein Raum für Webentwicklung, interaktive Experimente und die Neugier, Neues zu bauen.</p>
-            <a href="#projekte" className={styles.primaryLink}>Projekte entdecken <span aria-hidden="true">↘</span></a>
+            <Link to="#projekte" className={styles.primaryLink}>Projekte entdecken <span aria-hidden="true">↘</span></Link>
             <div className={styles.heroMeta}>
               <span><span className={styles.statusDot} /> </span>
               <span>build. break. learn. repeat.</span>
@@ -113,7 +114,7 @@ function ITPage() {
           <span><span className={styles.footerPrompt}>&gt;_</span> Mit Neugier gebaut. Von Pascal.</span>
           <Link to="/">Zurück zur Startseite <span aria-hidden="true">↗</span></Link>
         </footer>
-      </div>
+      </PageEffects>
     </main>
   )
 }
