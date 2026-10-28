@@ -1,6 +1,8 @@
 
 import { Link } from 'react-router'
+import { TerminalText } from '../../effects/TerminalText/TerminalText'
 import styles from './ProjectCard.module.css'
+import LiquidGlassProjectCard from '../LiquidGlassProjectCard/LiquidGlassProjectCard'
 
 type ProjectCardProps = {
   title: string
@@ -9,7 +11,7 @@ type ProjectCardProps = {
   status: string
   image?: string
   path?: string
-  variant?: 'default' | 'terminal'
+  variant?: 'default' | 'terminal' | 'glass'
   index?: number
 }
 
@@ -23,6 +25,8 @@ function ProjectCard({
   variant = 'default',
   index = 1,
 }: ProjectCardProps) {
+
+  if (variant === 'glass') return <LiquidGlassProjectCard title={title} category={category} description={description} status={status} image={image} path={path} index={index} />
 
   if (variant === 'terminal') {
     const terminalContent = (
@@ -39,7 +43,7 @@ function ProjectCard({
         </div>
         <div className={styles.terminalBody}>
           <div className={styles.terminalCategory}><span>{category.replace(/^IT\s*\/\s*/, '')}</span><span>{String(index).padStart(2, '0')}</span></div>
-          <h3 className={styles.terminalTitle}>{title}{path && <span aria-hidden="true">↗</span>}</h3>
+          <h3 className={styles.terminalTitle}>{title}{path && <span className={styles.terminalArrow} aria-hidden="true">↗</span>}</h3>
           <p className={styles.terminalDescription}>{description}</p>
           <div className={styles.terminalFooter}><span aria-hidden="true">&lt;/&gt;</span><span>{path ? 'Projekt ansehen' : 'In Planung'}{path && <span aria-hidden="true"> →</span>}</span></div>
         </div>
@@ -47,9 +51,9 @@ function ProjectCard({
     )
 
     return path ? (
-      <Link to={path} className={styles.terminalCard}>{terminalContent}</Link>
+      <Link to={path} className={styles.terminalCard}><TerminalText>{terminalContent}</TerminalText></Link>
     ) : (
-      <article className={styles.terminalCard}>{terminalContent}</article>
+      <article className={styles.terminalCard}><TerminalText>{terminalContent}</TerminalText></article>
     )
   }
 

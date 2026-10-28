@@ -8,9 +8,11 @@
     "build": "tsc -b && vite build",
     "test": "vitest run",
     "lint": "eslint .",
+    "test": "node --test src/components/effects/DepthPortrait/*.test.mjs src/pages/ITPage/effects/*.test.mjs src/transitions/__tests__/*.test.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
+    "gsap": "^3.15.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-router": "^8.5.0",
