@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" fill="none">
+  <title>Abstrakte organische Faltung</title>
+  <desc>Helle, übereinanderliegende Membranformen mit feinen Konturen. Grafischer Bildplatzhalter für spätere Einblicke in den Medizinbereich.</desc>
+  <defs>
+    <linearGradient id="background" x1="114" y1="30" x2="1088" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e0e3d7"/><stop offset="1" stop-color="#f4f4ec"/>
+    </linearGradient>
+    <linearGradient id="outer" x1="304" y1="180" x2="907" y2="769" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fbfcf4"/><stop offset=".38" stop-color="#d3d9c8"/><stop offset=".65" stop-color="#929f80"/><stop offset="1" stop-color="#d9dece"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="751" y1="303" x2="415" y2="683" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f9fbef"/><stop offset=".53" stop-color="#c5ceba"/><stop offset="1" stop-color="#5a684d"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="483" y1="266" x2="774" y2="660" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff"/><stop offset=".5" stop-color="#e1e7d7"/><stop offset="1" stop-color="#a9b899"/>
+    </linearGradient>
+    <filter id="shadow" x="200" y="611" width="842" height="261" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="32"/></filter>
+    <path id="membrane" d="M236 498c-44-104 7-226 133-262 111-32 142-108 259-86 106 20 107 100 206 161 117 72 150 161 88 260-50 79-98 78-167 142-84 79-168 94-248 34-68-51-100-50-171-85-79-39-75-108-100-164Z"/>
+    <clipPath id="membraneClip"><use href="#membrane"/></clipPath>
+  </defs>
+  <path fill="url(#background)" d="M0 0h1200v900H0z"/>
+  <g stroke="#1c211b" stroke-opacity=".065">
+    <path d="M70 0v900M1130 0v900M0 70h1200M0 830h1200"/>
+    <circle cx="600" cy="448" r="343"/>
+    <path d="M600 79v38M600 779v38M231 448h38M931 448h38"/>
+  </g>
+  <ellipse cx="621" cy="741" rx="357" ry="50" fill="#657458" fill-opacity=".21" filter="url(#shadow)"/>
+  <use href="#membrane" fill="url(#outer)"/>
+  <g clip-path="url(#membraneClip)">
+    <g stroke="#fbfcf4" stroke-opacity=".61" stroke-width="1.5">
+      <path d="M198 369c167-190 263 40 385-108 125-151 200 59 389 79M190 393c170-189 270 38 394-108 128-150 203 57 394 79M185 418c174-188 279 36 402-108 130-149 207 55 398 79M181 444c178-187 285 34 410-108 132-148 210 53 402 79M179 470c183-186 291 32 418-108 134-147 214 51 406 79M181 496c187-185 297 30 426-108 136-146 217 49 410 79M185 522c190-184 303 28 434-108 138-145 221 47 414 79M190 549c194-183 309 26 442-108 140-144 224 45 418 79M198 576c197-182 315 24 450-108 142-143 228 43 422 79M206 603c201-181 321 22 458-108 144-142 231 41 426 79M216 630c204-180 327 20 466-108 146-141 235 39 430 79M228 657c208-179 333 18 474-108 148-140 238 37 434 79M242 684c211-178 339 16 482-108 150-139 242 35 438 79M257 711c215-177 345 14 490-108 152-138 245 33 442 79M274 738c218-176 351 12 498-108 154-137 249 31 446 79"/>
+    </g>
+    <path d="M291 354c113-120 156 71 288-41 82-70 163-57 231 23 59 71 39 165-28 201-63 34-68 83-139 89-105 9-103-108-203-121-103-13-220-75-149-151Z" fill="url(#inner)"/>
+    <path d="M299 362c108-111 159 79 288-32 82-70 153-55 218 24" stroke="#fff" stroke-opacity=".85" stroke-width="3"/>
+    <path d="M429 303c73-66 156-93 235-25 53 46 54 126 6 172-70 67-141 19-155 91-11 55 81 78 57 124-33 63-167 5-186-73-16-66 55-89 52-151-3-59-67-86-9-138Z" fill="url(#fold)"/>
+    <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5">
+      <path d="M437 310c68-59 141-88 215-25M429 331c79-65 158-87 235-25M428 353c83-62 169-81 245-21M435 375c84-56 169-70 244-16M445 397c82-45 165-56 230-10M451 419c81-33 159-41 212-3M452 441c76-22 149-25 194 5M449 463c69-11 132-9 172 12M440 485c61 1 110 8 151 22M429 507c53 13 84 24 121 33M418 529c43 25 71 38 101 45M411 551c36 37 62 52 98 55M411 573c26 39 55 60 102 65M419 595c23 35 54 55 104 59"/>
+    </g>
+    <path d="M429 303c73-66 156-93 235-25" stroke="#fff" stroke-opacity=".9" stroke-width="3"/>
+  </g>
+  <use href="#membrane" stroke="#fff" stroke-opacity=".4"/>
+  <g stroke="#1c211b" stroke-opacity=".37" stroke-width="1.5"><path d="M61 70h18M70 61v18M1121 830h18M1130 821v18"/></g>
+  <circle cx="1045" cy="141" r="7" fill="#cbff32"/>
+</svg>

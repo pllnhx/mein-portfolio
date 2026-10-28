@@ -36,6 +36,15 @@ export const projects: Project[] = [
     path: '/art',
   },
   {
+    id: 'medizin',
+    title: 'Medizin',
+    category: 'Medizin',
+    description: 'Ein neuer Bereich für Gedanken, Themen und Projekte rund um Medizin.',
+    status: 'In Arbeit',
+    image: '/medizin/study-placeholder.svg',
+    path: '/medizin',
+  },
+  {
     id: '3d-experiment',
     title: '3D Experiment',
     category: 'IT / Creative Coding',

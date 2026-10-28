@@ -11,6 +11,7 @@ import MouseGlowPage from './pages/MouseGlowPage/MouseGlowPage'
 const ArtLayout = lazy(() => import('./pages/ArtPage/ArtLayout'))
 const ArtPage = lazy(() => import('./pages/ArtPage/ArtPage'))
 const ArtGalleryPage = lazy(() => import('./pages/ArtPage/ArtGalleryPage'))
+const MedizinPage = lazy(() => import('./pages/MedizinPage/MedizinPage'))
 
 function App() {
   return (
@@ -28,6 +29,15 @@ function App() {
       <Route
         path="/it/mouseglow"
         element={<MouseGlowPage />}
+      />
+
+      <Route
+        path="/medizin"
+        element={
+          <Suspense fallback={<main role="status" style={{ minHeight: '100vh', background: '#f4f4ec', color: '#1c211b', padding: '48px', fontFamily: 'Arial, sans-serif' }}>Medizin wird geladen …</main>}>
+            <MedizinPage />
+          </Suspense>
+        }
       />
 
       <Route
