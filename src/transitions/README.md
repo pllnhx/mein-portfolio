@@ -38,6 +38,8 @@ Der bisherige `BrowserRouter` mit `Routes` wurde innerhalb derselben React-Route
 4. Der Manager wartet auf den React-Commit der neuen Location. Scroll-Restoration erfolgt unter Schwarz. Zwei Rendering-Frames, optionale Seiten-Bereitschaft, sichtbare Bilder und Fonts bilden die Bereitschaftsbarriere.
 5. `reveal()` macht die bereits gemountete Zielseite sichtbar. Danach folgen Cleanup, Entsperren und Fokus auf `[data-page-focus]`, die erste `h1` oder `main`.
 
+Automatisch fokussierte statische Inhalte bekommen vorübergehend `data-transition-focus="true"`: Sie bleiben für Screenreader und die weitere Tastaturnavigation fokussiert, ohne einen sichtbaren Rahmen um die Überschrift zu erzeugen. Beim Blur werden Marker und vorheriger Tabindex wiederhergestellt. Interaktive Fokusziele, Links und Buttons behalten ihre normalen Tastatur-Fokusringe.
+
 Bei Data-Router-Loadern bleibt die Verdeckung auch während des Ladens stehen. Die Standardseiten benötigen keine zusätzliche Bereitschafts-API. Eine zukünftige Seite mit eigener Initialisierung kann ein **stabiles** Promise registrieren:
 
 ```tsx
@@ -76,6 +78,8 @@ In `registry.ts`:
 Die Reveal-Dauer wird auf 20–75 % der Gesamtdauer begrenzt. Die Demo darf Einstellungen pro Durchlauf überschreiben. Reihenfolge der Werte: **Durchlauf → Registrierung → Modulstandard**. `match: '/it'` betrifft genau die IT-Übersicht: `/it → /it/mouseglow` ist Leave; die Rückkehr ist Enter. Für eine ganze Designfamilie kann `match` eine Funktion sein, z. B. `path => path === '/art' || path.startsWith('/art/')`.
 
 Der Renderer verwendet begrenzte Canvas-2D-Zeichenströme, unterschiedliche Geschwindigkeiten und Traillängen, DPR maximal 2 und ResizeObserver/Resize-Fallback. Er erzeugt keine DOM-Elemente pro Matrix-Zeichen. Cover/Reveals laufen über eigene GSAP-Timelines. Canvas-Frames, Observer, Timelines, Abort-Listener, Styles und Effekt-DOM werden bei Ende oder Abbruch freigegeben.
+
+Scanlines und horizontale Glitch-Balken liegen in einer separaten Cover-Ebene. Diese und der Glitch auf der Quellansicht werden bereits nach vollständiger Verdeckung entfernt, bevor die Route wechselt. Beim Reveal laufen ausschließlich der ausblendende Matrix-Regen und die Terminalmeldung weiter; CSS-Streifen bleiben dadurch nicht nach dem Canvas-Fade auf der Zielseite stehen.
 
 ## Modulvertrag
 

@@ -1,4 +1,6 @@
 .content { min-height: 100svh; }
+/* Route announcements focus static content; interactive keyboard rings stay visible. */
+.content[data-transition-focus='true'], .content [data-transition-focus='true'] { outline: none; }
 .overlay { position: fixed; z-index: 10000; inset: 0; isolation: isolate; visibility: hidden; pointer-events: none; }
 .overlay[data-active='true'] { visibility: visible; pointer-events: auto; }
 .backdrop, .mount { position: absolute; inset: 0; }

@@ -31,7 +31,13 @@ function fixture({ compile = true } = {}) {
     dispatchEvent(event) { this.listeners.get(event.type)?.(event); return !event.defaultPrevented },
   })
   install('window', { ...target(), devicePixelRatio: 3 })
-  install('document', { ...target(), hidden: false })
+  install('document', { ...target(), hidden: false, createElement: () => ({
+    width: 0, height: 0,
+    getContext: () => ({
+      drawImage() {},
+      getImageData: (_x, _y, width, height) => ({ data: new Uint8ClampedArray(width * height * 4).fill(128) }),
+    }),
+  }) })
   install('requestAnimationFrame', (callback) => { frames.set(++nextFrame, callback); return nextFrame })
   install('cancelAnimationFrame', (id) => frames.delete(id))
   install('Image', class {
@@ -44,21 +50,21 @@ function fixture({ compile = true } = {}) {
   install('ResizeObserver', class { observe() {} disconnect() { disconnected++ } })
   const gl = {
     VERTEX_SHADER: 1, FRAGMENT_SHADER: 2, COMPILE_STATUS: 3, LINK_STATUS: 4,
-    ARRAY_BUFFER: 5, STATIC_DRAW: 6, FLOAT: 7, UNPACK_FLIP_Y_WEBGL: 8,
+    ARRAY_BUFFER: 5, STATIC_DRAW: 6, FLOAT: 7, UNPACK_FLIP_Y_WEBGL: 8, ELEMENT_ARRAY_BUFFER: 9,
     TEXTURE0: 10, TEXTURE_2D: 11, TEXTURE_MIN_FILTER: 12, TEXTURE_MAG_FILTER: 13,
     LINEAR: 14, TEXTURE_WRAP_S: 15, TEXTURE_WRAP_T: 16, CLAMP_TO_EDGE: 17,
-    RGBA: 18, UNSIGNED_BYTE: 19, BLEND: 20, COLOR_BUFFER_BIT: 21, TRIANGLE_STRIP: 22,
+    RGBA: 18, UNSIGNED_BYTE: 19, BLEND: 20, COLOR_BUFFER_BIT: 21, TRIANGLES: 22, UNSIGNED_SHORT: 23,
     createShader: () => ({}), shaderSource() {}, compileShader() {}, getShaderParameter: () => compile,
     getShaderInfoLog: () => 'test shader failure',
     createProgram: () => ({}), attachShader() {}, linkProgram() {}, getProgramParameter: () => true,
     useProgram() {}, createBuffer: () => ({}), bindBuffer() {}, bufferData() {},
-    getAttribLocation: () => 0, enableVertexAttribArray() {}, vertexAttribPointer() {}, pixelStorei() {},
+    getAttribLocation: (_program, name) => ['aPosition', 'aUv', 'aDepth'].indexOf(name), enableVertexAttribArray() {}, vertexAttribPointer() {}, pixelStorei() {},
     createTexture: () => ({}), activeTexture() {}, bindTexture() {}, texParameteri() {}, texImage2D() {},
     getUniformLocation: (_, name) => name,
     uniform1i: (name, value) => uniforms.set(name, value),
     uniform1f: (name, value) => uniforms.set(name, value),
     uniform2f: (name, x, y) => uniforms.set(name, [x, y]),
-    disable() {}, clearColor() {}, viewport() {}, clear() {}, drawArrays() { draws++ },
+    disable() {}, clearColor() {}, viewport() {}, clear() {}, drawElements() { draws++ },
     deleteTexture() { deleted.textures++ }, deleteShader() { deleted.shaders++ },
     deleteProgram() { deleted.programs++ }, deleteBuffer() { deleted.buffers++ },
   }
@@ -83,6 +89,7 @@ test('mouse normalization and smoothing stay bounded and independent of frame ra
 test('all four supplied maps are bound; DPR is capped and idle rendering stops', async () => {
   const env = fixture()
   const scene = await createDepthPortrait(env.canvas, PORTRAIT_ASSETS, new AbortController().signal)
+  assert.equal(env.draws, 1, 'the canvas must be painted before it replaces the static image')
   assert.equal(env.canvas.width, 1834)
   assert.equal(env.canvas.height, 1629)
   assert.deepEqual(['uPhoto', 'uDepth', 'uRoughness', 'uAlpha'].map((name) => env.uniforms.get(name)), [0, 1, 2, 3])
@@ -101,7 +108,7 @@ test('all four supplied maps are bound; DPR is capped and idle rendering stops',
   assert.equal(env.frames.size, 1)
   scene.dispose()
   scene.dispose()
-  assert.deepEqual(env.deleted, { textures: 4, shaders: 2, programs: 1, buffers: 1 })
+  assert.deepEqual(env.deleted, { textures: 4, shaders: 2, programs: 1, buffers: 2 })
   assert.equal(env.disconnected, 2)
   assert.ok(env.cleaned)
 })

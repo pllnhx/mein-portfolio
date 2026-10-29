@@ -29,7 +29,14 @@ function createITTransition(context: TransitionContext, direction: TransitionDir
   const message = document.createElement('p')
   message.className = styles.message
   message.textContent = direction === 'enter' ? 'CONNECTING_' : 'DISCONNECTING_'
-  root.append(canvas, message)
+  // Cover-only interference must disappear before the new page is revealed.
+  // Keeping these pseudo-elements on root left them visible after canvas faded.
+  const interference = document.createElement('div')
+  interference.className = styles.interference
+  interference.dataset.mode = direction
+  interference.setAttribute('data-it-transition-interference', '')
+  interference.setAttribute('aria-hidden', 'true')
+  root.append(canvas, message, interference)
   context.mount.append(root)
   const rain = new MatrixRain(canvas, context.mount, density, speed)
   const scope = gsap.context(() => {}, root)
@@ -42,6 +49,8 @@ function createITTransition(context: TransitionContext, direction: TransitionDir
   let settle: (status: 'completed' | 'cancelled') => void = () => {}
   const finished = new Promise<'completed' | 'cancelled'>((resolve) => { settle = resolve })
   const removeGlitch = () => {
+    interference.remove()
+    rain.glitch = 0
     context.source.classList.remove(styles.sourceGlitch)
     if (previousStrength) context.source.style.setProperty('--it-glitch-strength', previousStrength)
     else context.source.style.removeProperty('--it-glitch-strength')
@@ -92,6 +101,7 @@ function createITTransition(context: TransitionContext, direction: TransitionDir
       if (context.settings.showSuccess !== false) message.textContent = direction === 'enter' ? 'ACCESS GRANTED' : 'SYSTEM ONLINE'
     },
     reveal: async () => {
+      removeGlitch()
       await run('revealing', (timeline) => {
         timeline.to(context.backdrop, { opacity: 0, duration: revealDuration * .88, ease: 'power2.inOut' }, 0)
         timeline.to(message, { opacity: 0, duration: revealDuration * .5, ease: 'power1.inOut' }, revealDuration * .15)

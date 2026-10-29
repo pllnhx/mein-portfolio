@@ -9,3 +9,9 @@ export function normalizedPointer(x: number, y: number, bounds: { left: number; 
 export function smoothPointer(current: number, target: number, elapsed: number) {
   return current + (target - current) * (1 - Math.exp(-Math.min(64, elapsed) / 85))
 }
+
+/** Soft radial saturation avoids a stronger diagonal pull at viewport corners. */
+export function boundedPortraitPointer(pointer: { x: number; y: number }, limit = .85) {
+  const scale = limit / Math.sqrt(limit * limit + pointer.x * pointer.x + pointer.y * pointer.y)
+  return { x: pointer.x * scale, y: pointer.y * scale }
+}

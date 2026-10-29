@@ -2,10 +2,11 @@
 .canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: 0; }
 .message { position: absolute; top: 50%; left: 0; width: 100%; margin: 0; padding: 24px; font-size: clamp(13px, 2.4vw, 23px); font-weight: 400; line-height: 1.6; letter-spacing: .24em; text-align: center; text-shadow: 0 0 18px #6cffb06e; transform: translateY(-50%); }
 .message::before { display: block; margin-bottom: 14px; color: #62a67a; font-size: 9px; letter-spacing: .4em; content: 'SECURE CONNECTION // TERMINAL'; }
-.root::after { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 4px, #64ff9c09 4px 5px); content: ''; }
-.root[data-mode='leave']::before { position: absolute; z-index: 1; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 8%, #0009 8% 8.8%, transparent 8.8% 16%); opacity: var(--it-glitch-strength, .5); animation: strips 700ms steps(4, end) both; content: ''; }
+.interference { position: absolute; inset: 0; pointer-events: none; }
+.interference::after { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 4px, #64ff9c09 4px 5px); content: ''; }
+.interference[data-mode='leave']::before { position: absolute; z-index: 1; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 8%, #0009 8% 8.8%, transparent 8.8% 16%); opacity: var(--it-glitch-strength, .5); animation: strips 700ms steps(4, end) both; content: ''; }
 .sourceGlitch { animation: sourceSignal 650ms steps(1, end) both; }
 .sourceGlitch::after { position: fixed; z-index: 90; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 5px, #9cf8ff15 5px 6px); opacity: var(--it-glitch-strength, .5); pointer-events: none; content: ''; }
 @keyframes sourceSignal { 0%, 18%, 46%, 77%, 100% { text-shadow: none; } 25%, 65% { text-shadow: calc(var(--it-glitch-strength, .5) * 3px) 0 #ff476e, calc(var(--it-glitch-strength, .5) * -3px) 0 #54f9df; } }
 @keyframes strips { from { transform: translateY(-4%); } to { transform: translateY(4%); } }
-@media (prefers-reduced-motion: reduce) { .canvas { display: none; } .sourceGlitch, .root::before { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .canvas, .interference { display: none; } .sourceGlitch { animation: none; } }

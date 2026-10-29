@@ -3,8 +3,10 @@ import { Link } from 'react-router'
 import DepthPortrait from '../../components/effects/DepthPortrait/DepthPortrait'
 import { PORTRAIT_ASSETS } from '../../components/effects/DepthPortrait/portraitAssets'
 import ProjectCard from '../../components/ui/ProjectCard/ProjectCard'
+import LiquidGlassBackdrop from '../../components/ui/LiquidGlassProjectCard/LiquidGlassBackdrop'
 import { projects } from '../../data/projects'
 import { useTransitionReady } from '../../transitions/core/TransitionControls'
+import { useHomeProjectMotion } from './useHomeProjectMotion'
 import styles from './HomePage.module.css'
 
 const categories = ['Alle', 'IT', 'Fotografie', 'Kunst', 'Videografie'] as const
@@ -13,6 +15,8 @@ function HomePage() {
   const [category, setCategory] = useState<(typeof categories)[number]>('Alle')
   const [portraitActive, setPortraitActive] = useState(true)
   const projectSection = useRef<HTMLElement>(null)
+  const projectContent = useRef<HTMLDivElement>(null)
+  useHomeProjectMotion(projectSection, projectContent, setPortraitActive)
   const [portraitReady] = useState(() => {
     let resolve: () => void = () => {}
     const promise = new Promise<void>((done) => { resolve = done })
@@ -25,19 +29,7 @@ function HomePage() {
     const rootBackground = document.documentElement.style.backgroundColor
     document.body.style.backgroundColor = '#ffffff'
     document.documentElement.style.backgroundColor = '#ffffff'
-    let frame: number | null = null
-    const measure = () => {
-      frame = null
-      if (projectSection.current) setPortraitActive(projectSection.current.getBoundingClientRect().top > 40)
-    }
-    const scroll = () => { if (frame === null) frame = requestAnimationFrame(measure) }
-    window.addEventListener('scroll', scroll, { passive: true })
-    window.addEventListener('resize', scroll)
-    scroll()
     return () => {
-      if (frame !== null) cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', scroll)
-      window.removeEventListener('resize', scroll)
       document.body.style.backgroundColor = bodyBackground
       document.documentElement.style.backgroundColor = rootBackground
     }
@@ -62,13 +54,14 @@ function HomePage() {
       </section>
 
       <section ref={projectSection} id="projekte" className={styles.projects} aria-labelledby="projects-title">
+        <LiquidGlassBackdrop containerRef={projectSection} />
         <div className={styles.sheetHandle} aria-hidden="true" />
-        <div className={styles.projectInner}>
-          <div className={styles.projectHeader}>
+        <div ref={projectContent} className={styles.projectInner}>
+          <div className={styles.projectHeader} data-project-reveal>
             <div><p className={styles.eyebrow}>AUSGEWÄHLTE ARBEITEN</p><h2 id="projects-title">Meine Projekte<span>.</span></h2></div>
             <Link to="/it" className={styles.labLink}>IT & Vibe Coding entdecken <span aria-hidden="true">↗</span></Link>
           </div>
-          <div className={styles.projectToolbar}>
+          <div className={styles.projectToolbar} data-project-reveal>
             <div className={styles.filters} role="group" aria-label="Projekte nach Bereich filtern">
               {categories.map((item) => <button key={item} type="button" aria-pressed={category === item} className={`${styles.filter} ${category === item ? styles.activeFilter : ''}`} onClick={() => setCategory(item)}>{item}</button>)}
             </div>
@@ -77,7 +70,7 @@ function HomePage() {
           <div className={styles.projectGrid}>
             {selected.map((project) => <ProjectCard key={project.id} {...project} variant="glass" index={projects.indexOf(project) + 1} />)}
           </div>
-          <footer className={styles.footer}><span>Pascals Portfolio</span><Link to="/">Zurück nach oben <span aria-hidden="true">↑</span></Link></footer>
+          <footer className={styles.footer} data-project-reveal><span>Pascals Portfolio</span><Link to="/">Zurück nach oben <span aria-hidden="true">↑</span></Link></footer>
         </div>
       </section>
     </main>
