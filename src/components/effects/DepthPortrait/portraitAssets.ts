@@ -7,4 +7,4 @@ export const PORTRAIT_ASSETS: PortraitAssets = {
   alpha: '/images/alphamaske.png',
 }
 
-export const PORTRAIT_SETTINGS = { parallax: .025, reflection: .85, maxDpr: 1.75 } as const
+export const PORTRAIT_SETTINGS = { parallax: .018, reflection: .85, maxDpr: 1.75, gutter: .04, maxPointer: .85 } as const

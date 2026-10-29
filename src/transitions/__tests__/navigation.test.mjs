@@ -4,6 +4,7 @@ import { JSDOM } from 'jsdom'
 import { createServer } from 'vite'
 
 let dom, server, React, createRoot, RouterProvider, createPortfolioRouter, module
+let projectCount
 let reduced = true
 const errors = []
 const anchorScrolls = []
@@ -41,6 +42,7 @@ before(async () => {
   server = await createServer({ server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' })
   module = await server.ssrLoadModule('/src/router.tsx')
   createPortfolioRouter = module.createPortfolioRouter
+  projectCount = (await server.ssrLoadModule('/src/data/projects.ts')).projects.length
 })
 
 after(async () => {
@@ -86,7 +88,7 @@ test('the white homepage uses the supplied portrait/logo and filters the central
     assert.ok(document.querySelector('[data-depth-portrait] img').style.maskImage.includes('alphamaske.png'))
     const headings = () => document.querySelectorAll('#projekte h3')
     const pressFilter = (label) => Array.from(document.querySelectorAll('#projekte button')).find((button) => button.textContent === label).click()
-    assert.equal(headings().length, 5)
+    assert.equal(headings().length, projectCount)
     pressFilter('IT')
     await until(() => headings().length === 2, 'IT project filter')
     assert.ok(document.querySelector('#projekte a[href="/it/mouseglow"]'))
@@ -94,7 +96,7 @@ test('the white homepage uses the supplied portrait/logo and filters the central
     await until(() => headings().length === 1, 'photography filter')
     assert.equal(headings()[0].textContent, 'Fotoprojekt')
     pressFilter('Alle')
-    await until(() => headings().length === 5, 'all projects restored')
+    await until(() => headings().length === projectCount, 'all projects restored')
     assert.equal(document.querySelector('[data-terminal-word]'), null)
     assert.deepEqual(errors, [])
   } finally { await app.cleanup() }
@@ -116,12 +118,14 @@ test('real Links, native Back/Forward and scroll/focus restoration use the same 
     await settled(app, '/it')
     assert.equal(window.scrollY, 0)
     assert.equal(document.activeElement.tagName, 'H1')
+    assert.equal(document.activeElement.dataset.transitionFocus, 'true')
     assert.ok(commits.length && commits.every((opacity) => opacity === '1'))
     assert.equal(app.engine.getSnapshot().direction, 'enter')
     window.scrollTo(0, 450)
     window.history.back()
     await settled(app, '/')
     assert.equal(app.engine.getSnapshot().direction, 'leave')
+    assert.equal(document.activeElement.dataset.transitionFocus, 'true')
     assert.equal(window.scrollY, 123)
     window.history.forward()
     await settled(app, '/it')
@@ -179,11 +183,25 @@ test('Escape cancels an uncommitted navigation without losing the source page', 
 test('the actual GSAP/Canvas IT module enters, leaves and removes all effect DOM/styles', async () => {
   reduced = false
   const app = await mount()
+  const visibleStages = []
+  const unsubscribe = app.engine.subscribe(() => {
+    const { phase } = app.engine.getSnapshot()
+    if (phase !== 'switching' && phase !== 'revealing') return
+    const content = document.querySelector('[data-transition-content]')
+    visibleStages.push({
+      phase,
+      interference: !!document.querySelector('[data-it-transition-interference]'),
+      sourceGlitch: content.className.includes('sourceGlitch'),
+      strength: content.style.getPropertyValue('--it-glitch-strength'),
+    })
+  })
   try {
     click('/it')
     await until(() => document.querySelector('[data-transition-overlay] canvas'), 'Matrix module loaded')
     assert.ok(document.querySelector('[data-transition-overlay]').textContent.includes('CONNECTING_'))
+    assert.ok(document.querySelector('[data-it-transition-interference]'))
     await until(() => app.engine.getSnapshot().phase === 'revealing', 'destination is revealing')
+    assert.equal(document.querySelector('[data-it-transition-interference]'), null, 'scanlines must already be gone while the Matrix is fading')
     window.history.back()
     await settled(app, '/it')
     assert.equal(document.querySelector('[data-transition-overlay] canvas'), null)
@@ -191,12 +209,16 @@ test('the actual GSAP/Canvas IT module enters, leaves and removes all effect DOM
     click('/')
     await until(() => document.querySelector('[data-transition-overlay] canvas'), 'leave Matrix mounted')
     assert.ok(document.querySelector('[data-transition-overlay]').textContent.includes('DISCONNECTING_'))
+    assert.ok(document.querySelector('[data-it-transition-interference]'))
     await settled(app, '/')
     assert.equal(document.querySelector('[data-transition-overlay] canvas'), null)
     assert.equal(document.querySelector('[data-transition-content]').style.getPropertyValue('--it-glitch-strength'), '')
     assert.equal(app.engine.getSnapshot().error, null)
+    assert.ok(visibleStages.some(({ phase }) => phase === 'switching'))
+    assert.ok(visibleStages.some(({ phase }) => phase === 'revealing'))
+    assert.ok(visibleStages.every(({ interference, sourceGlitch, strength }) => !interference && !sourceGlitch && strength === ''), 'both directions must remove all interference before switching/revealing')
     assert.deepEqual(errors, [])
-  } finally { await app.cleanup() }
+  } finally { unsubscribe(); await app.cleanup() }
 })
 
 test('the isolated demo supports Enter, Leave, Reset and useNavigate', async () => {

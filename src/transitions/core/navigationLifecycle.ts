@@ -1,5 +1,5 @@
-import type { NavigationAction, RouteLocation } from '../types'
-import { afterPaint, guarded } from './async'
+import type { NavigationAction, RouteLocation } from '../types.ts'
+import { afterPaint, guarded } from './async.ts'
 
 export type ScrollPosition = { x: number; y: number }
 export function restoreScroll(location: RouteLocation, action: NavigationAction, positions: Map<string, ScrollPosition>) {
@@ -33,13 +33,22 @@ export function focusPage(content: HTMLElement) {
     ?? content.querySelector<HTMLElement>('h1')
     ?? content.querySelector<HTMLElement>('main') ?? content
   const old = element.getAttribute('tabindex')
+  const oldFocusMarker = element.getAttribute('data-transition-focus')
+  const staticTarget = !element.matches('a[href], button, input, select, textarea, summary, [contenteditable="true"], [role="button"], [role="link"], [tabindex]:not([tabindex="-1"])')
+  if (staticTarget) element.setAttribute('data-transition-focus', 'true')
   element.setAttribute('tabindex', '-1')
-  element.focus({ preventScroll: true })
   const restore = () => {
     if (old === null) element.removeAttribute('tabindex')
     else element.setAttribute('tabindex', old)
+    if (staticTarget) {
+      if (oldFocusMarker === null) element.removeAttribute('data-transition-focus')
+      else element.setAttribute('data-transition-focus', oldFocusMarker)
+    }
+    element.removeEventListener('blur', restore)
   }
   element.addEventListener('blur', restore, { once: true })
+  element.focus({ preventScroll: true })
+  if (element.ownerDocument.activeElement !== element) restore()
   const copy = element.cloneNode(true) as HTMLElement
   copy.querySelectorAll('[aria-hidden="true"]').forEach((node) => node.remove())
   return copy.textContent?.replace(/\s+/g, ' ').trim() ?? 'Seite'

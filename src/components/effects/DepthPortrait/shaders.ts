@@ -1,9 +1,17 @@
 export const portraitVertexShader = `
 attribute vec2 aPosition;
+attribute vec2 aUv;
+attribute float aDepth;
+// Shared uniforms need identical precision in both WebGL 1 shader stages.
+uniform mediump vec2 uPointer;
+uniform vec2 uDepthShift;
+uniform float uRigidShift;
+uniform float uImageScale;
 varying vec2 vUv;
 void main() {
-  vUv = aPosition * 0.5 + 0.5;
-  gl_Position = vec4(aPosition, 0.0, 1.0);
+  vUv = aUv;
+  vec2 offset = uPointer * (vec2(uRigidShift) + uDepthShift * (aDepth - 0.5));
+  gl_Position = vec4((aPosition + offset) * uImageScale, 0.0, 1.0);
 }`
 
 export const portraitFragmentShader = `
@@ -13,21 +21,17 @@ uniform sampler2D uPhoto;
 uniform sampler2D uDepth;
 uniform sampler2D uRoughness;
 uniform sampler2D uAlpha;
-uniform vec2 uPointer;
+uniform mediump vec2 uPointer;
 uniform vec2 uTexel;
-uniform float uParallax;
 uniform float uReflection;
 
 void main() {
-  // Small overscan prevents exposing the cropped source edges during parallax.
-  vec2 baseUv = (vUv - 0.5) / 1.025 + 0.5;
-  vec2 uv = baseUv;
-  for (int pass = 0; pass < 5; pass++) {
-    float depth = texture2D(uDepth, uv).r;
-    uv = baseUv - uPointer * vec2(uParallax, uParallax * 0.72) * (depth - 0.32);
-  }
-  if (uv.x < 0.0 || uv.y < 0.0 || uv.x > 1.0 || uv.y > 1.0) discard;
+  // Forward-projected geometry keeps one source coordinate for every map.
+  // Never solve depth by repeatedly resampling across the cutout boundary.
+  vec2 uv = vUv;
   float alpha = smoothstep(0.08, 0.96, texture2D(uAlpha, uv).r);
+  // Feather only the already cropped source borders into the white page.
+  alpha *= smoothstep(0.0, 0.015, min(uv.x, 1.0 - uv.x)) * smoothstep(0.0, 0.015, uv.y);
   if (alpha < 0.005) discard;
 
   vec2 imageUv = vec2(uv.x, 1.0 - uv.y);
@@ -50,9 +54,8 @@ void main() {
   vec3 halfway = normalize(light + view);
   float specular = pow(max(dot(normal, halfway), 0.0), mix(24.0, 150.0, 1.0 - roughness));
 
-  // The photographed reflection shifts locally with the curved glass surface.
-  vec2 reflectedUv = uv + glass * uPointer * vec2(0.008, 0.005);
-  vec3 photo = texture2D(uPhoto, reflectedUv).rgb;
+  // Keep the photographed image registered with its matte; only lighting moves.
+  vec3 photo = texture2D(uPhoto, uv).rgb;
   float band = exp(-pow((visor.x + visor.y * 0.28 - uPointer.x * 0.55 + 0.3) * 6.5, 2.0));
   vec3 reflection = vec3(0.91, 0.96, 1.0) * (specular * 0.62 + band * 0.065);
   vec3 color = photo + reflection * glass * uReflection;
