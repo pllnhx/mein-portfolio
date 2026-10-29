@@ -1,0 +1,9 @@
+.portrait { position: relative; width: 100%; aspect-ratio: 1048 / 931; margin: 0; overflow: visible; }
+/* Atomic visibility swap: two differently deformed portraits never cross-fade. */
+.fallback, .canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.fallback { object-fit: contain; }
+.canvas { opacity: 0; pointer-events: none; }
+.portrait[data-renderer='webgl'] .canvas { opacity: 1; }
+.portrait[data-renderer='webgl'] .fallback { opacity: 0; }
+.caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .fallback, .canvas { transition: none; } }

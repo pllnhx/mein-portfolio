@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100" fill="none">
+  <title>Abstrakte skulpturale Büste</title>
+  <desc>Ein neutrales Profil aus hellgrauen Schichten und feinen Konturlinien auf einem warmen, hellen Hintergrund. Grafischer Bildplatzhalter ohne reale Person.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="900" y2="1100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f4f4ec"/><stop offset="1" stop-color="#e4e5dc"/>
+    </linearGradient>
+    <linearGradient id="sculpture" x1="251" y1="480" x2="692" y2="705" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a8aca1"/><stop offset=".3" stop-color="#d0d3c8"/><stop offset=".65" stop-color="#f7f7ef"/><stop offset="1" stop-color="#b8bdb0"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="315" y1="328" x2="612" y2="894" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#666d60" stop-opacity=".25"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientTransform="translate(471 499) rotate(90) scale(382 350)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="72" y="877" width="778" height="209" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="29"/>
+    </filter>
+    <path id="profile" d="M167 1035c37-108 153-116 178-213l4-118c-64-57-77-147-59-253 8-104 48-168 143-181 91-12 146 23 175 99 24 58 9 107 46 150l39 40c12 17-3 24-15 25l-29 7c-7 33 4 46 4 50 4 9-13 19-30 29 9 33-16 51-16 51l-63 13-3 82c24 86 169 93 211 219H167Z"/>
+    <clipPath id="bust"><use href="#profile"/></clipPath>
+  </defs>
+  <path fill="url(#background)" d="M0 0h900v1100H0z"/>
+  <path fill="url(#halo)" d="M70 88h760v830H70z"/>
+  <g stroke="#1c211b" stroke-opacity=".07">
+    <path d="M81 0v1100M819 0v1100M0 162h900M0 947h900"/>
+    <circle cx="450" cy="514" r="332"/>
+    <circle cx="450" cy="514" r="354"/>
+    <path d="M450 151v49M450 829v49M87 514h49M764 514h49"/>
+  </g>
+  <ellipse cx="461" cy="982" rx="302" ry="37" fill="#606957" fill-opacity=".19" filter="url(#shadow)"/>
+  <use href="#profile" fill="url(#sculpture)"/>
+  <g clip-path="url(#bust)">
+    <path d="M328 198c-99 228-84 451 24 533 62 47 108 48 145 113 27 46 25 118 14 208H140V198h188Z" fill="#78816f" fill-opacity=".2"/>
+    <path d="M444 242c-111 70-139 240-95 344 34 82 110 124 120 213 11 91-33 145-50 248h58c13-86 64-157 55-248-10-105-73-134-105-219-41-109-6-224 68-307l-51-31Z" fill="#fff" fill-opacity=".29"/>
+    <g stroke="url(#edge)" stroke-width="2">
+      <path d="M212 335c80-33 221-75 367-21M196 357c91-35 255-66 400-19M190 380c103-37 271-54 418-17M182 404c114-38 292-44 437-16M177 430c125-36 306-32 450-13M173 457c136-34 321-20 459-10M172 485c147-30 331-7 464-8M176 514c149-25 340 4 467-6M180 544c157-18 346 15 473-3M191 575c164-11 344 27 473-2M204 607c162-3 335 39 466-1M219 639c160 6 321 46 446 0M237 672c151 15 296 52 414 1M252 704c142 26 277 56 387 2M267 738c133 36 254 55 357-1M270 771c136 42 251 55 345-2M265 804c138 44 253 52 347-1M253 837c144 44 265 53 369 5M232 870c158 44 299 59 413 12M214 903c168 44 330 65 453 19M196 936c180 44 357 71 497 27M178 969c196 44 388 76 541 34M161 1002c209 44 419 82 582 41"/>
+    </g>
+    <path d="M519 297c63 34 79 84 79 130 0 49-1 76 31 111l24 26-25 10c-8 47 8 63-13 74-10 5-17 12-14 24 8 23-17 40-53 45" stroke="#fff" stroke-opacity=".7" stroke-width="3"/>
+    <ellipse cx="492" cy="537" rx="29" ry="45" transform="rotate(-15 492 537)" fill="#a5ad9b" fill-opacity=".32"/>
+    <path d="M487 503c-24 2-27 37-7 56 11 10 19 5 19-6" stroke="#f4f4ec" stroke-opacity=".65" stroke-width="3"/>
+  </g>
+  <use href="#profile" stroke="#707a65" stroke-opacity=".13"/>
+  <g stroke="#1c211b" stroke-width="1.5" stroke-opacity=".4">
+    <path d="M72 72h18M81 63v18M810 72h18M819 63v18M72 1028h18M81 1019v18M810 1028h18M819 1019v18"/>
+  </g>
+  <circle cx="743" cy="231" r="8" fill="#cbff32"/>
+  <path d="M741 262v56m-28-28h56" stroke="#1c211b" stroke-opacity=".15"/>
+</svg>

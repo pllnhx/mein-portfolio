@@ -1,0 +1,27 @@
+.page { min-height: 100svh; padding: 52px max(24px, calc((100vw - 1120px) / 2)); background: #101412; color: #e0e8e2; font-family: Consolas, Menlo, monospace; }
+.page h1 { margin: 24px 0 14px; font-size: clamp(25px, 4vw, 44px); letter-spacing: -1.5px; }
+.page p { color: #9faea3; font-size: 12px; line-height: 1.8; }
+.page a { color: #a9e9ba; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; margin-top: 30px; }
+.stage { position: relative; min-height: 430px; isolation: isolate; overflow: hidden; border: 1px solid #ffffff26; border-radius: 12px; background: #1c1e2c; }
+.scene { display: flex; flex-direction: column; justify-content: center; min-height: 430px; padding: 48px; background: radial-gradient(ellipse at 15% 20%, #60678775, transparent 70%), #1c1e2c; }
+.scene[data-scene='it'] { background: #111413; color: #b2f7c4; }
+.scene h2 { font-size: 28px; letter-spacing: -1px; }
+.scene span { font-size: 10px; letter-spacing: 2px; color: #9aada0; }
+.host { position: absolute; z-index: 10; inset: 0; visibility: hidden; pointer-events: none; }
+.host[data-active='true'] { visibility: visible; pointer-events: auto; }
+.backdrop, .mount { position: absolute; inset: 0; }
+.backdrop { background: #000; opacity: 0; }
+.panel { padding: 23px; border: 1px solid #ffffff1c; border-radius: 12px; background: #ffffff04; }
+.panel h2 { margin: 0 0 24px; font-size: 16px; }
+.control { display: block; margin-bottom: 20px; font-size: 11px; color: #a8b8ad; }
+.control span { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.control output { color: #d3edda; }
+.control input { width: 100%; accent-color: #a3e8b7; }
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.buttons button, .navigate { padding: 12px 16px; border: 1px solid #a3e8b738; border-radius: 5px; background: #a3e8b710; color: #c5edcf; font: inherit; font-size: 11px; cursor: pointer; }
+.buttons button:disabled { opacity: .4; cursor: default; }
+.buttons button:focus-visible, .page a:focus-visible, .control input:focus-visible { outline: 2px solid #a3e8b7; outline-offset: 4px; }
+.state { margin-top: 18px; padding: 12px; border-radius: 4px; background: #0004; color: #a3e8b7; font-size: 11px; }
+.links { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 30px; font-size: 12px; }
+@media(max-width: 800px) { .layout { grid-template-columns: 1fr; } .scene { padding: 28px; min-height: 330px; } .stage { min-height: 330px; } }

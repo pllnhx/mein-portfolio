@@ -145,8 +145,8 @@ a.terminalCard:hover .terminalImage { transform: scale(1.035); filter: saturate(
 .terminalCategory { display: flex; justify-content: space-between; gap: 12px; color: #9fb3a3; font-size: 8px; text-transform: uppercase; letter-spacing: 1px; }
 .terminalCategory > span:last-child { color: #78887c; }
 .terminalTitle { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 15px 0 10px; font-size: 19px; font-weight: 500; letter-spacing: -.8px; line-height: 1.4; }
-.terminalTitle > span { font-size: 20px; color: #9cac9f; transition: color 180ms ease; }
-a.terminalCard:hover .terminalTitle > span { color: #a3e8b7; }
+.terminalArrow { font-size: 20px; color: #9cac9f; transition: color 180ms ease; }
+a.terminalCard:hover .terminalArrow { color: #a3e8b7; }
 .terminalDescription { margin: 0 0 24px; color: #9ba79e; font-size: 11px; line-height: 1.9; }
 .terminalFooter { display: flex; justify-content: space-between; gap: 10px; margin-top: auto; padding: 15px 0; border-top: 1px solid #ffffff0d; color: #b1c0b5; font-size: 9px; }
 .terminalFooter > span:first-child { color: #8fa894; }
@@ -164,6 +164,6 @@ a.terminalCard:hover .terminalTitle > span { color: #a3e8b7; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .terminalCard, .terminalImage, .terminalTitle > span { transition: none; }
+  .terminalCard, .terminalImage, .terminalArrow { transition: none; }
   a.terminalCard:hover, a.terminalCard:hover .terminalImage { transform: none; }
 }

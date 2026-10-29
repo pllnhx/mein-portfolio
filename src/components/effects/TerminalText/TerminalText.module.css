@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'Terminal Segments';
+  src: url('/fonts/terminal-segments.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.run { display: inline; }
+.word { position: relative; display: inline-block; white-space: pre; }
+.overlay { position: absolute; inset: 0; pointer-events: none; }
+
+.word[data-effect='glitch'] > .overlay::before,
+.word[data-effect='glitch'] > .overlay::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-terminal-overlay);
+  pointer-events: none;
+  color: #f1f5f2;
+  clip-path: inset(16% 0 56%);
+  animation: wordTear var(--word-glitch-duration, 1s) steps(1, end) both;
+  text-shadow: -2px 0 #e5ebe7;
+}
+
+.word[data-effect='glitch'] > .overlay::after {
+  clip-path: inset(59% 0 13%);
+  animation-direction: reverse;
+  text-shadow: 2px 0 #cbd5ce;
+}
+
+.word[data-tone='color'] > .overlay::before { color: #ff4554; text-shadow: -2px 0 #ff4554; }
+.word[data-tone='color'] > .overlay::after { color: #62f5ed; text-shadow: 2px 0 #62f5ed; }
+
+/* The original characters keep their native size, spacing and line wrapping. */
+.character { position: relative; }
+.characterOverlay { position: relative; z-index: 3; display: inline-block; width: 0; height: 0; vertical-align: baseline; overflow: visible; pointer-events: none; }
+.glyphCanvas { position: absolute; top: 0; left: 0; overflow: visible; }
+.character[data-scramble-phase] > .characterSource { opacity: 0; color: #ff4c54; transition: color 600ms ease; }
+.character[data-scramble-phase='tint'] > .characterSource,
+.character[data-scramble-phase='untint'] > .characterSource { opacity: 1; }
+.character[data-scramble-phase='untint'] > .characterSource { color: inherit; }
+
+.glyph {
+  fill: #ff4c54;
+  font-family: 'Terminal Segments', monospace;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+  letter-spacing: 0;
+  white-space: pre;
+}
+
+.character[data-scramble-phase='corrupt'] .glyph,
+.character[data-scramble-phase='restore'] .glyph {
+  font-family: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+
+.character[data-scramble-phase='tint'] > .characterOverlay,
+.character[data-scramble-phase='untint'] > .characterOverlay { visibility: hidden; }
+
+@keyframes wordTear {
+  0%, 12%, 38%, 63%, 86%, 100% { transform: translate(0); }
+  18% { transform: translate(-3px, 1px); }
+  28% { transform: translate(2px, -1px); }
+  48% { transform: translate(3px); }
+  72% { transform: translate(-2px, 1px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word[data-effect] > .source,
+  .character[data-scramble-phase] > .characterSource { opacity: 1; color: inherit; transition: none; }
+  .word[data-effect] > .overlay,
+  .character[data-scramble-phase] > .characterOverlay { display: none; }
+}

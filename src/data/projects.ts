@@ -32,7 +32,17 @@ export const projects: Project[] = [
     title: 'Kunstprojekt',
     category: 'Kunst',
     description: 'Hier zeige ich später eigene Zeichnungen und Kunstwerke.',
-    status: 'Geplant',
+    status: 'In Arbeit',
+    path: '/art',
+  },
+  {
+    id: 'medizin',
+    title: 'Medizin',
+    category: 'Medizin',
+    description: 'Ein neuer Bereich für Gedanken, Themen und Projekte rund um Medizin.',
+    status: 'In Arbeit',
+    image: '/medizin/study-placeholder.svg',
+    path: '/medizin',
   },
   {
     id: '3d-experiment',
